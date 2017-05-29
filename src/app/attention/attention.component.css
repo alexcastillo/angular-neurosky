@@ -2,4 +2,5 @@
 img {
     height: 100vh;
     transition: all 1s;
+    filter: blur(100px);
 }

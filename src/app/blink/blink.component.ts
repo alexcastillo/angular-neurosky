@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
   styleUrls: ['./blink.component.css']
 })
 export class BlinkComponent {
-  socket = io('http://localhost:4301');
+  socket = io('http://localhost:4501');
   blinks = Observable.fromEvent<any>(this.socket, 'metric:blinks');
   sayIt = this.blinks
     .debounceTime(500)

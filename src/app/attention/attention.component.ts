@@ -9,7 +9,7 @@ import * as io from 'socket.io-client';
 })
 export class AttentionComponent {
   offset = 30;
-  socket = io('http://localhost:4301');
+  socket = io('http://localhost:4501');
   brainwaves = Observable.fromEvent<any>(this.socket, 'metric:eeg');
   image = 'https://pbs.twimg.com/media/CiEn5P_WEAMn5wT.jpg';
   attentionFilter = this.brainwaves
