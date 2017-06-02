@@ -4,16 +4,58 @@ import * as io from 'socket.io-client';
 
 @Component({
   selector: 'attention',
-  template: `<img [src]="image" [ngStyle]="(attentionFilter | async)" />`,
-  styleUrls: ['./attention.component.css']
+  template: `
+  <div class="ball-container" [style.width.vw]="maxWidth | async">
+  <div class="ball"  [style.width.px]="circleSize |async" [style.height.px]="circleSize | async" [ngStyle]="attentionTransform | async">
+    <span [style.fontSize.px]="valueInsideCircle | async" class="valueInsideCircle">{{ valueInsideCircle | async }} </span>
+  </div>
+  </div>
+  `,
+  
+  styles: [`
+
+  .ball-container {
+
+  }
+
+  .ball {
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+  }
+  .valueInsideCircle {
+    color: white;
+    display:flex;
+    align-self: center;
+    text-align: center;
+    font-size: 22px;
+    font-family: 'Arial';
+    transition: all 1s;
+  }
+  
+  `]
 })
 export class AttentionComponent {
-  offset = 30;
+  offset = 60;
   socket = io('http://localhost:4501');
   brainwaves = Observable.fromEvent<any>(this.socket, 'metric:eeg');
   image = 'https://pbs.twimg.com/media/CiEn5P_WEAMn5wT.jpg';
-  attentionFilter = this.brainwaves
+
+  valueInsideCircle = this.brainwaves.map(eeg => eeg.eSense.attention);
+  circleSize = this.brainwaves.map(eeg => eeg.eSense.attention * 2);
+
+  attentionTransform = this.brainwaves
     .map(eeg => ({
-        filter: `blur(${ Math.abs(eeg.eSense.attention - this.offset) }px)`
+        transform: `translateX(${ eeg.eSense.attention }vw)`
     }));
+  
 }
+
+
