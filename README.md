@@ -1,5 +1,6 @@
 # AngularNeurosky
 
+* Download and install the [ThinkGear Connector](http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_user_guide)
 * clone & npm isntall
 * npm start
 * go to http://localhost:4500
