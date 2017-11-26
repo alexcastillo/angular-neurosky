@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node ./src/server & ng serve  --port 4500",
+    "start": "npm run bci & ng serve --port 4500",
+    "bci": "node ./src/server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,7 +23,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "node-thinkgear-sockets": "0.0.1",
-    "rxjs": "^5.1.0",
+    "rxjs": "^5.5.2",
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1",
     "zone.js": "^0.8.4"
