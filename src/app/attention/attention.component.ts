@@ -1,19 +1,40 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { fromEvent } from 'rxjs/Observable/fromEvent';
+import { interval } from 'rxjs/observable/interval';
+import { from } from 'rxjs/observable/from';
+import { map, tap, zip, mergeMap, switchMap } from 'rxjs/operators';
+import { createAttentionMock } from '../shared/mock';
 import * as io from 'socket.io-client';
+import linspace from 'linspace';
+
+const wsUrl = 'http://localhost:4501';
+const video = { length: 5 };
+const sampleRate = 250;
+const offset = 30;
 
 @Component({
   selector: 'attention',
-  template: `<img [src]="image" [ngStyle]="(attentionFilter | async)" />`,
+  template: `
+    <video muted [playbackRate]="1" [currentTime]="currentTime$|async">
+      <source src="./assets/timelapse.mov" type="video/mp4" />
+    </video>
+    <aside>{{ attention$ | async }}%</aside>
+  `,
   styleUrls: ['./attention.component.css']
 })
 export class AttentionComponent {
-  offset = 30;
-  socket = io('http://localhost:4501');
-  brainwaves = Observable.fromEvent<any>(this.socket, 'metric:eeg');
-  image = 'https://pbs.twimg.com/media/CiEn5P_WEAMn5wT.jpg';
-  attentionFilter = this.brainwaves
-    .map(eeg => ({
-        filter: `blur(${ Math.abs(eeg.eSense.attention - this.offset) }px)`
-    }));
+  prev: any = 0;
+  stream$ = fromEvent<any>(io(wsUrl), 'metric:eeg');
+  attention$ = this.stream$.pipe(
+    map(eeg => Math.abs((eeg as any).eSense.attention - offset))
+  );
+  currentTime$ = this.attention$.pipe(
+    switchMap(attention => {
+      const range = from(linspace(this.prev, attention, sampleRate));
+      this.prev = attention;
+      return range;
+    }),
+    zip(interval(1000 / sampleRate), x => x),
+    map(attention => Math.abs((video.length * (attention as any)) / 100))
+  );
 }

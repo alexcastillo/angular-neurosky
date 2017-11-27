@@ -1,6 +1,14 @@
 
-img {
-    height: 100vh;
-    transition: all 1s;
-    filter: blur(100px);
+video {
+    width: 100vw;
+}
+
+aside {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    color: white;
+    font-size: 42px;
+    opacity: 0.2;
+    font-family: cursive;
 }
