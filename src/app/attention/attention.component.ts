@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { fromEvent } from 'rxjs/Observable/fromEvent';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 import { interval } from 'rxjs/observable/interval';
 import { from } from 'rxjs/observable/from';
 import { map, tap, zip, mergeMap, switchMap } from 'rxjs/operators';
