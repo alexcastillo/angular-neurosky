@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { interval } from 'rxjs/observable/interval';
 import { from } from 'rxjs/observable/from';
-import { map, tap, zip, mergeMap, switchMap } from 'rxjs/operators';
+import { map, tap, zip, mergeMap } from 'rxjs/operators';
 import { createAttentionMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
@@ -29,7 +29,7 @@ export class AttentionComponent {
     map(eeg => Math.abs((eeg as any).eSense.attention - offset))
   );
   currentTime$ = this.attention$.pipe(
-    switchMap(attention => {
+    mergeMap(attention => {
       const range = from(linspace(this.prev, attention, sampleRate));
       this.prev = attention;
       return range;
