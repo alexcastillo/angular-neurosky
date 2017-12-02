@@ -10,7 +10,7 @@ import linspace from 'linspace';
 const wsUrl = 'http://localhost:4501';
 const video = { length: 5 };
 const sampleRate = 250;
-const offset = 30;
+const offset = 0;
 
 @Component({
   selector: 'attention',
