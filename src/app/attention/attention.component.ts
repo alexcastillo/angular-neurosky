@@ -3,38 +3,39 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { interval } from 'rxjs/observable/interval';
 import { from } from 'rxjs/observable/from';
 import { map, tap, zip, mergeMap } from 'rxjs/operators';
-import { createAttentionMock } from '../shared/mock';
+import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
 
-const wsUrl = 'http://localhost:4501';
-const video = { length: 24 };
-const fps = 60;
-const offset = 0;
+import { videos, defaultMetric, defaultVideo } from '../shared/videos';
 
 @Component({
   selector: 'attention',
   template: `
-    <video muted [playbackRate]="1" [currentTime]="currentTime$|async">
-      <source src="./assets/timelapse.mov" type="video/mp4" />
+    <video muted
+      [currentTime]="currentTime$ | async"
+      [playbackRate]="video.playbackRate">
+      <source [src]="video.url" [type]="video.type" />
     </video>
-    <aside>{{ attention$ | async }}%</aside>
+    <aside>{{ metric$ | async }}%</aside>
   `,
   styleUrls: ['./attention.component.css']
 })
 export class AttentionComponent {
-  prev: any = 0;
-  stream$ = fromEvent<any>(io(wsUrl), 'metric:eeg');
-  attention$ = this.stream$.pipe(
-    map(eeg => Math.abs((eeg as any).eSense.attention - offset))
+  prevMetric: any = 0;
+  metricName = defaultMetric;
+  video: any = videos[defaultMetric][defaultVideo];
+  stream$ = fromEvent(io('http://localhost:4501'), 'metric:eeg');
+  metric$ = this.stream$.pipe(
+    map((eeg: any) => Math.abs(eeg.eSense[this.metricName] - this.video.offset))
   );
-  currentTime$ = this.attention$.pipe(
-    mergeMap(attention => {
-      const range = from(linspace(this.prev, attention, fps));
-      this.prev = attention;
+  currentTime$ = this.metric$.pipe(
+    mergeMap(metric => {
+      const range = from(linspace(this.prevMetric, metric, this.video.fps));
+      this.prevMetric = metric;
       return range;
     }),
-    zip(interval(1000 / fps), x => x),
-    map(attention => Math.abs((video.length * (attention as any)) / 100))
+    zip(interval(1000 / this.video.fps), x => x),
+    map((metric: any) => Math.abs((this.video.length * metric) / 100))
   );
 }

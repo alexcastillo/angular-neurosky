@@ -2,19 +2,27 @@
 import { interval } from 'rxjs/observable/interval';
 import { map } from 'rxjs/operators/map';
 
-export const createAttentionMock = (every = 1000):any => {
-    let attention = 50;
+export const range = [0, -5, -3, 3, 5];
+
+export const simulate = (startAt, range) => {
+    let metric = startAt;
+    const offset = range[Math.floor(Math.random() * range.length)];
+    if (metric !== 0 && metric !== 100) {
+        metric += offset;
+    }
+    return metric;
+};
+
+export const createMock = (every = 1000):any => {
+    let attentionStartAt = 0;
+    let meditationStartAt = 0;
     return interval(every).pipe<any>(
-        map(() => {
-            const ranges = [0, -5, -3, 3, 5];
-            const offset = ranges[Math.floor(Math.random() * ranges.length)];
-            if (attention !== 0 && attention !== 100) {
-                attention += offset;
+        map(() => ({
+            eSense: {
+                attention: simulate(attentionStartAt, range),
+                meditation: simulate(meditationStartAt, range)
             }
-            return {
-                eSense: { attention }
-            };
-        })
+        }))
     );
 };
     
