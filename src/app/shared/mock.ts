@@ -1,28 +1,26 @@
 
+import linspace from 'linspace';
 import { interval } from 'rxjs/observable/interval';
-import { map } from 'rxjs/operators/map';
+import { scan } from 'rxjs/operators/scan';
 
-export const range = [0, -5, -3, 3, 5];
+export const range = linspace(-5, 5, 11);
+export const seed = { eSense: { attention: 0, meditation: 0 } };
 
-export const simulate = (startAt, range) => {
-    let metric = startAt;
+export const simulate = prev => {
+    let metric = prev;
     const offset = range[Math.floor(Math.random() * range.length)];
-    if (metric !== 0 && metric !== 100) {
+    if (metric + offset > 0 && metric + offset <= 100) {
         metric += offset;
     }
     return metric;
 };
 
-export const createMock = (every = 1000):any => {
-    let attentionStartAt = 0;
-    let meditationStartAt = 0;
-    return interval(every).pipe<any>(
-        map(() => ({
+export const createMock = (every = 1000):any =>
+    interval(every).pipe<any>(
+        scan(({ eSense: { attention, meditation } }: any) => ({
             eSense: {
-                attention: simulate(attentionStartAt, range),
-                meditation: simulate(meditationStartAt, range)
+                attention: simulate(attention),
+                meditation: simulate(meditation)
             }
-        }))
+        }), seed)
     );
-};
-    
