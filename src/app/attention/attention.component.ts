@@ -8,8 +8,8 @@ import * as io from 'socket.io-client';
 import linspace from 'linspace';
 
 const wsUrl = 'http://localhost:4501';
-const video = { length: 5 };
-const sampleRate = 250;
+const video = { length: 24 };
+const fps = 60;
 const offset = 0;
 
 @Component({
@@ -30,11 +30,11 @@ export class AttentionComponent {
   );
   currentTime$ = this.attention$.pipe(
     mergeMap(attention => {
-      const range = from(linspace(this.prev, attention, sampleRate));
+      const range = from(linspace(this.prev, attention, fps));
       this.prev = attention;
       return range;
     }),
-    zip(interval(1000 / sampleRate), x => x),
+    zip(interval(1000 / fps), x => x),
     map(attention => Math.abs((video.length * (attention as any)) / 100))
   );
 }
