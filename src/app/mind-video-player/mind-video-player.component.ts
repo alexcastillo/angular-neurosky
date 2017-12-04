@@ -10,7 +10,7 @@ import linspace from 'linspace';
 import { videos, defaultMetric, defaultVideo } from '../shared/videos';
 
 @Component({
-  selector: 'attention',
+  selector: 'mind-video-player',
   template: `
     <video muted
       [currentTime]="currentTime$ | async"
@@ -19,9 +19,9 @@ import { videos, defaultMetric, defaultVideo } from '../shared/videos';
     </video>
     <aside>{{ metric$ | async }}%</aside>
   `,
-  styleUrls: ['./attention.component.css']
+  styleUrls: ['./mind-video-player.component.css']
 })
-export class AttentionComponent {
+export class MindVideoPlayerComponent {
   prevMetric: any = 0;
   metricName = defaultMetric;
   video: any = videos[defaultMetric][defaultVideo];

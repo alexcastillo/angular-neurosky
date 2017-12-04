@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AttentionComponent } from './attention.component';
+import { MindVideoPlayerComponent } from './mind-video-player.component';
 
-describe('AttentionComponent', () => {
-  let component: AttentionComponent;
-  let fixture: ComponentFixture<AttentionComponent>;
+describe('MindVideoPlayerComponent', () => {
+  let component: MindVideoPlayerComponent;
+  let fixture: ComponentFixture<MindVideoPlayerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AttentionComponent ]
+      declarations: [ MindVideoPlayerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AttentionComponent);
+    fixture = TestBed.createComponent(MindVideoPlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
