@@ -19,7 +19,9 @@ const clamp = metric => Math.min(Math.max(0, metric), 100);
       [playbackRate]="video.playbackRate">
       <source [src]="video.url" [type]="video.type" />
     </video>
-    <aside>{{ metric$ | async }}%</aside>
+    <aside [style.color]="video.fontColor">
+      {{ metric$ | async }}%
+    </aside>
   `,
   styleUrls: ['./mind-video-player.component.css']
 })

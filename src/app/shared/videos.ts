@@ -7,6 +7,7 @@ export const videos = {
         flower: {
             url: './assets/flower.mov',
             type: 'video/mov',
+            fontColor: 'beige',
             playbackRate: 1,
             length: 5,
             offset: 0,
@@ -15,6 +16,7 @@ export const videos = {
         coffee: {
             url: './assets/coffee-pour.mov',
             type: 'video/mp4',
+            fontColor: 'maroon',
             playbackRate: 1,
             length: 24,
             offset: 0,
@@ -23,6 +25,7 @@ export const videos = {
         beer: {
             url: './assets/beer-pour.mp4',
             type: 'video/mp4',
+            fontColor: 'beige',
             playbackRate: 1,
             length: 27,
             offset: 0,
@@ -33,6 +36,7 @@ export const videos = {
         coffee: {
             url: './assets/coffee-spill.mp4',
             type: 'video/mp4',
+            fontColor: 'black',
             playbackRate: 1,
             length: 26,
             offset: 0,
