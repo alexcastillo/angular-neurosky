@@ -13,7 +13,7 @@ export const videos = {
             fps: 60
         },
         coffee: {
-            url: './assets/coffee-pour.mp4',
+            url: './assets/coffee-pour.mov',
             type: 'video/mp4',
             playbackRate: 1,
             length: 24,
