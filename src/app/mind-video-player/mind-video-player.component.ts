@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { interval } from 'rxjs/observable/interval';
 import { from } from 'rxjs/observable/from';
-import { map, tap, zip, switchMap } from 'rxjs/operators';
+import { switchMap, map, zip } from 'rxjs/operators';
 import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
@@ -20,7 +20,7 @@ const clamp = metric => Math.min(Math.max(0, metric), 100);
       <source [src]="video.url" [type]="video.type" />
     </video>
     <aside [style.color]="video.fontColor">
-      {{ metric$ | async }}%
+      {{ metric$ | async }}<span *ngIf="metric$ | async">%</span>
     </aside>
   `,
   styleUrls: ['./mind-video-player.component.css']
@@ -34,19 +34,21 @@ export class MindVideoPlayerComponent {
   videoName = this.route.snapshot.paramMap.get('videoName');
   video: any = videos[this.metricName][this.videoName];
 
-  stream$ = fromEvent(io('http://localhost:4501'), 'metric:eeg');
+  stream$ = createMock(1000); //fromEvent(io('http://localhost:4501'), 'metric:eeg');
 
   metric$ = this.stream$.pipe(
-    map((eeg: any) => clamp(eeg.eSense[this.metricName] - this.video.offset))
+    map((eeg: any) => eeg.eSense[this.metricName])
   );
 
   currentTime$ = this.metric$.pipe(
     switchMap(metric => {
       const range = from(linspace(this.prevMetric, metric, this.video.fps));
       this.prevMetric = metric;
-      return range;
-    }),
-    zip(interval(this.video.fps), metric => metric),
-    map((metric: any) => Math.abs((this.video.length * metric) / 100))
+      return range.pipe(
+        zip(interval(1000 / this.video.fps), (metric: any) =>
+          (this.video.length * clamp(metric  - this.video.offset)) / 100
+        )
+      );
+    })
   );
 }
