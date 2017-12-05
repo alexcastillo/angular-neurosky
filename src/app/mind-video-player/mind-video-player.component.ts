@@ -13,16 +13,7 @@ const clamp = metric => Math.min(Math.max(0, metric), 100);
 
 @Component({
   selector: 'mind-video-player',
-  template: `
-    <video muted
-      [currentTime]="currentTime$ | async"
-      [playbackRate]="video.playbackRate">
-      <source [src]="video.url" [type]="video.type" />
-    </video>
-    <aside [style.color]="video.fontColor">
-      {{ metric$ | async }}<span *ngIf="metric$ | async">%</span>
-    </aside>
-  `,
+  templateUrl: './mind-video-player.component.html',
   styleUrls: ['./mind-video-player.component.css']
 })
 export class MindVideoPlayerComponent {
