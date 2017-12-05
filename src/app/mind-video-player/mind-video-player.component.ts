@@ -9,6 +9,7 @@ import * as io from 'socket.io-client';
 import linspace from 'linspace';
 import videos from '../shared/videos';
 
+const clamp = metric => Math.min(Math.max(0, metric), 100);
 
 @Component({
   selector: 'mind-video-player',
@@ -34,7 +35,7 @@ export class MindVideoPlayerComponent {
   stream$ = fromEvent(io('http://localhost:4501'), 'metric:eeg');
 
   metric$ = this.stream$.pipe(
-    map((eeg: any) => Math.abs(eeg.eSense[this.metricName] - this.video.offset))
+    map((eeg: any) => clamp(eeg.eSense[this.metricName] - this.video.offset))
   );
 
   currentTime$ = this.metric$.pipe(
