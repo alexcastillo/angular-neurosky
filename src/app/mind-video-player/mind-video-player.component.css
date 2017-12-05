@@ -1,14 +1,17 @@
 
 video {
-    width: 100vw;
+    height: 100%;
+    width: 181vh; /* 100 * 16 / 9 */
+    min-width: 100%;
+    min-height: 56.25vw; /* 100 * 9 / 16 */
 }
 
 aside {
     position: absolute;
-    right: 40px;
-    bottom: 20px;
-    color: white;
-    font-size: 42px;
-    opacity: 0.2;
-    font-family: cursive;
+    right: 6vw;
+    top: 50%;
+    font-size: 6vw;
+    opacity: 0.4;
+    font-family: Georgia;
+    transform: translateY(-50%);
 }
