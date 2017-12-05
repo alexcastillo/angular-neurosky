@@ -6,20 +6,20 @@ export const videos = {
     attention: {
         flower: {
             url: './assets/flower.mov',
-            type: 'video/mov',
+            type: 'video/mp4',
             fontColor: 'beige',
             playbackRate: 1,
             length: 5,
-            offset: 0,
+            offset: 30,
             fps: 60
         },
         coffee: {
             url: './assets/coffee-pour.mov',
             type: 'video/mp4',
-            fontColor: 'maroon',
+            fontColor: 'beige',
             playbackRate: 1,
             length: 24,
-            offset: 0,
+            offset: 30,
             fps: 60
         },
         beer: {
@@ -28,7 +28,7 @@ export const videos = {
             fontColor: 'beige',
             playbackRate: 1,
             length: 27,
-            offset: 0,
+            offset: 20,
             fps: 60
         }
     },
