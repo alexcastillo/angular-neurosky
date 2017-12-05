@@ -23,12 +23,12 @@ export const videos = {
             fps: 60
         },
         beer: {
-            url: './assets/beer-pour.mp4',
+            url: './assets/beer-pour.mov',
             type: 'video/mp4',
             fontColor: 'beige',
             playbackRate: 1,
             length: 27,
-            offset: 20,
+            offset: 0,
             fps: 60
         }
     },
