@@ -14,7 +14,7 @@ const appRoutes: Routes = [
     component: MindVideoPlayerComponent,
   },
   { path: '',
-    redirectTo: '/attention/coffee',
+    redirectTo: '/attention/beer',
     pathMatch: 'full'
   }
 ];
