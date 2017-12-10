@@ -1,0 +1,5 @@
+<aside [style.color]="image.fontColor">
+    {{ metric$ | async }}<span *ngIf="metric$ | async">%</span>
+</aside>
+<img [src]="image.url" [ngStyle]="filter$ | async" />
+

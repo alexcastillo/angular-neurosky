@@ -1,9 +1,7 @@
 
-video {
-    height: 100%;
-    width: 181vh; /* 100 * 16 / 9 */
-    min-width: 100%;
-    min-height: 56.25vw; /* 100 * 9 / 16 */
+img {
+    height: 100vh;
+    transition: filter 1s;
 }
 
 aside {

@@ -1,11 +1,8 @@
 
-export const defaultMetric = 'attention';
-export const defaultVideo = 'coffee';
-
 export const videos = {
     attention: {
         flower: {
-            url: './assets/flower.mov',
+            url: './assets/videos/flower.mov',
             type: 'video/mp4',
             fontColor: 'beige',
             playbackRate: 1,
@@ -14,7 +11,7 @@ export const videos = {
             fps: 60
         },
         coffee: {
-            url: './assets/coffee-pour.mov',
+            url: './assets/videos/coffee-pour.mov',
             type: 'video/mp4',
             fontColor: 'beige',
             playbackRate: 1,
@@ -23,7 +20,7 @@ export const videos = {
             fps: 60
         },
         beer: {
-            url: './assets/beer-pour.mov',
+            url: './assets/videos/beer-pour.mov',
             type: 'video/mp4',
             fontColor: 'beige',
             playbackRate: 1,
@@ -34,7 +31,7 @@ export const videos = {
     },
     meditation: {
         coffee: {
-            url: './assets/coffee-spill.mp4',
+            url: './assets/videos/coffee-spill.mp4',
             type: 'video/mp4',
             fontColor: 'black',
             playbackRate: 1,

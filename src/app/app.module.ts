@@ -6,15 +6,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MindVideoPlayerComponent } from './mind-video-player/mind-video-player.component';
+import { MindImageFilterComponent } from './mind-image-filter/mind-image-filter.component';
 import { BlinkComponent } from './blink/blink.component';
 
 const appRoutes: Routes = [
   {
-    path: ':metricName/:videoName',
+    path: 'video/:metricName/:videoName',
     component: MindVideoPlayerComponent,
   },
+  {
+    path: 'image/:metricName/:imageName',
+    component: MindImageFilterComponent,
+  },
   { path: '',
-    redirectTo: '/attention/beer',
+    redirectTo: 'video/attention/beer',
     pathMatch: 'full'
   }
 ];
@@ -23,6 +28,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MindVideoPlayerComponent,
+    MindImageFilterComponent,
     BlinkComponent
   ],
   imports: [
