@@ -7,7 +7,7 @@ import { switchMap, map, zip } from 'rxjs/operators';
 import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
-import videos from '../shared/videos';
+import videos from './videos';
 
 const clamp = metric => Math.min(Math.max(0, metric), 100);
 

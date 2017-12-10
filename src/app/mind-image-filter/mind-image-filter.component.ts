@@ -4,7 +4,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { startWith, map } from 'rxjs/operators';
 import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
-import images from '../shared/images';
+import images from './images';
 
 const clamp = metric => Math.min(Math.max(0, metric), 100);
 
