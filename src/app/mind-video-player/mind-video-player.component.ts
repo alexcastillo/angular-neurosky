@@ -8,8 +8,7 @@ import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
 import videos from './videos';
-
-const clamp = metric => Math.min(Math.max(0, metric), 100);
+import { clamp } from '../shared/utils';
 
 @Component({
   selector: 'mind-video-player',
