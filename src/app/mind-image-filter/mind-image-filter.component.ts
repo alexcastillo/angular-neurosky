@@ -5,7 +5,7 @@ import { startWith, map } from 'rxjs/operators';
 import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import images from './images';
-import { clamp } from '../shared/utils';
+import { clamp, reverse } from '../shared/utils';
 
 @Component({
   selector: 'mind-image-filter',
@@ -25,9 +25,7 @@ export class MindImageFilterComponent {
 
   metric$ = this.stream$.pipe(
     map((eeg: any) => eeg.eSense[this.metricName]),
-    map((metric: any) => this.image.reverseMetric ? (
-      Math.abs(metric - 100)
-    ) : metric)
+    map((metric: any) => this.image.reverse ? reverse(metric) : metric)
   );
 
   filter$ = this.metric$.pipe(

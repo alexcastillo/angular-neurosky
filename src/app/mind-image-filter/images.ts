@@ -6,7 +6,7 @@ export const images = {
             filter: 'blur',
             unit: 'px',
             startWith: 100,
-            reverseMetric: true,
+            reverse: true,
             fontColor: 'beige',
             offset: 0
         }
