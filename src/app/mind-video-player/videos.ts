@@ -30,6 +30,15 @@ export const videos = {
         }
     },
     meditation: {
+        flower: {
+            url: './assets/videos/flower.mov',
+            type: 'video/mp4',
+            fontColor: 'beige',
+            playbackRate: 1,
+            length: 5,
+            offset: 50,
+            fps: 60
+        },
         coffee: {
             url: './assets/videos/coffee-spill.mp4',
             type: 'video/mp4',
