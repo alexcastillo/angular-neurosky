@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run bci & ng serve --port 4500",
-    "bci": "node ./src/server",
+    "start": "npm run web & npm run mindwave",
+    "web": "ng serve --port 4500",
+    "mindwave": "node ./src/server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
