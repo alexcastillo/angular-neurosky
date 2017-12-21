@@ -15,4 +15,12 @@ aside {
     font-family: Georgia;
     transform: translateY(-50%);
     z-index: 1;
+    min-width: 6vw;
+    text-align: center;
+}
+
+aside span {
+    display: block;
+    font-size: 3vw;
+    margin-top: 10px;
 }
