@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { interval } from 'rxjs/observable/interval';
 import { from } from 'rxjs/observable/from';
-import { switchMap, map, zip } from 'rxjs/operators';
+import { switchMap, startWith, map, zip } from 'rxjs/operators';
 import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
@@ -27,7 +27,8 @@ export class MindVideoPlayerComponent {
   stream$ = fromEvent(io('http://localhost:4501'), 'metric:eeg');
 
   metric$ = this.stream$.pipe(
-    map((eeg: any) => eeg.eSense[this.metricName])
+    map((eeg: any) => eeg.eSense[this.metricName]),
+    startWith(0)
   );
 
   currentTime$ = this.metric$.pipe(
