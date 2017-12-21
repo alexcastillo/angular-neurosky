@@ -25,11 +25,11 @@ export class MindImageFilterComponent {
 
   metric$ = this.stream$.pipe(
     map((eeg: any) => eeg.eSense[this.metricName]),
-    map((metric: any) => this.image.reverse ? reverse(metric) : metric)
+    map((metric: any) => this.image.reverse ? reverse(metric) : metric),
+    startWith(this.image.startWith)
   );
 
   filter$ = this.metric$.pipe(
-    startWith(this.image.startWith),
     map((metric: any) => {
       const { filter, offset, unit } = this.image;
       const value = clamp(metric - offset);
