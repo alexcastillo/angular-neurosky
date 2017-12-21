@@ -3,7 +3,7 @@ import linspace from 'linspace';
 import { interval } from 'rxjs/observable/interval';
 import { scan } from 'rxjs/operators/scan';
 
-export const range = linspace(-5, 5, 11);
+export const range = linspace(-15, 15, 11);
 export const seed = { eSense: { attention: 50, meditation: 50 } };
 
 export const simulate = prev => {
