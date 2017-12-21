@@ -10,7 +10,13 @@ aside {
     top: 50%;
     font-size: 6vw;
     opacity: 0.4;
-    font-family: Georgia;
     transform: translateY(-50%);
     z-index: 1;
+    min-width: 6vw;
+    text-align: center;
+}
+
+aside span {
+    display: block;
+    font-size: 3vw;
 }
