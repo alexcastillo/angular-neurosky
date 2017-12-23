@@ -1,9 +1,9 @@
 
-const thinkgear = require('node-thinkgear-sockets');
+const { createClient } = require('node-thinkgear-sockets');
 const { fromEvent } = require('rxjs/observable/fromEvent');
 const io = require('socket.io')(4501);
 
-const client = thinkgear.createClient();
+const client = createClient();
 
 client.connect();
 

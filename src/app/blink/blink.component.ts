@@ -10,7 +10,7 @@ import * as io from 'socket.io-client';
 })
 export class BlinkComponent {
   socket = io('http://localhost:4501');
-  blinks = fromEvent<any>(this.socket, 'metric:blinks');
+  blinks = fromEvent<any>(this.socket, 'metric/blinks');
   sayIt = this.blinks.pipe(
     debounceTime(500)
   ).subscribe(({ blinkStrength }) => {
