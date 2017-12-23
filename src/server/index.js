@@ -15,5 +15,5 @@ fromEvent(client, 'blink_data')
 
 function sendToBrowser (data, metric) {
     console.log(metric, data);
-    io.emit(`metric:${ metric }`, data);
+    io.emit(`metric/${ metric }`, data);
 }

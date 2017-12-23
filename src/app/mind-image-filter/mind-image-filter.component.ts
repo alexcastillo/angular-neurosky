@@ -21,7 +21,7 @@ export class MindImageFilterComponent {
   image: any = images[this.metricName][this.imageName];
   prevMetric: any = this.image.startWith;
 
-  stream$ = fromEvent(io('http://localhost:4501'), 'metric:eeg');
+  stream$ = fromEvent(io('http://localhost:4501'), 'metric/eeg');
 
   metric$ = this.stream$.pipe(
     map((eeg: any) => eeg.eSense[this.metricName]),
