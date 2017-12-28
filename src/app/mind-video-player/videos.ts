@@ -36,11 +36,11 @@ export const videos = {
             fontColor: 'beige',
             playbackRate: 1,
             length: 5,
-            offset: 50,
+            offset: 30,
             fps: 60
         },
         coffee: {
-            url: './assets/videos/coffee-spill.mp4',
+            url: './assets/videos/coffee-pour.mov',
             type: 'video/mp4',
             fontColor: 'black',
             playbackRate: 1,

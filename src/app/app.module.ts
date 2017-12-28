@@ -18,8 +18,9 @@ const appRoutes: Routes = [
     path: 'image/:metricName/:imageName',
     component: MindImageFilterComponent,
   },
-  { path: '',
-    redirectTo: 'video/attention/beer',
+  {
+    path: '',
+    redirectTo: 'video/meditation/flower',
     pathMatch: 'full'
   }
 ];
