@@ -3,7 +3,7 @@
     [playbackRate]="video.playbackRate">
     <source [src]="video.url" [type]="video.type" />
 </video>
-<aside  *ngIf="metric$ | async" [style.color]="video.fontColor">
-    {{ metric$ | async }}%
+<aside  *ngIf="metricValue$ | async" [style.color]="video.fontColor">
+    {{ metricValue$ | async }}%
     <span>{{ metricName }}</span>
 </aside>
