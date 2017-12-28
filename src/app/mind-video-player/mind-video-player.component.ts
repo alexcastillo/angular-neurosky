@@ -22,7 +22,7 @@ export class MindVideoPlayerComponent {
   metricName = this.route.snapshot.paramMap.get('metricName');
   videoName = this.route.snapshot.paramMap.get('videoName');
   isMock = this.route.snapshot.queryParamMap.get('mock');
-  video: any = videos[this.metricName][this.videoName];
+  video = videos[this.metricName][this.videoName];
 
   stream$ = !this.isMock
     ? fromEvent(io('http://localhost:4501'), 'metric/eeg')
