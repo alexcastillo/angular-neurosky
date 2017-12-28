@@ -33,7 +33,7 @@ export class MindVideoPlayerComponent {
   );
 
   currentTime$ = this.metricValue$.pipe(
-    scan(([, prev], next): any => [prev, next], [0, 0]),
+    scan(([, prev], next: number) => [prev, next], [0, 0]),
     switchMap(([ prev, next ]) =>
       from(linspace(prev, next, this.video.fps)).pipe(
         zip(interval(1000 / this.video.fps), this.timeMapper)
