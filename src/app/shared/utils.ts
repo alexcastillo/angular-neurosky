@@ -1,4 +1,9 @@
 
-export const clamp = metric => Math.min(Math.max(0, metric), 100);
+export const clamp = metricValue =>
+    Math.min(Math.max(0, metricValue), 100);
 
-export const reverse = metric => Math.abs(metric - 100);
+export const reverse = metricValue =>
+    Math.abs(metricValue - 100);
+
+export const timeMapper = (metricValue, { length, offset }) =>
+    length * clamp(metricValue - offset) / 100;

@@ -8,7 +8,7 @@ import { createMock } from '../shared/mock';
 import * as io from 'socket.io-client';
 import linspace from 'linspace';
 import videos from './videos';
-import { clamp } from '../shared/utils';
+import { timeMapper } from '../shared/utils';
 
 @Component({
   selector: 'mind-video-player',
@@ -36,11 +36,11 @@ export class MindVideoPlayerComponent {
     scan(([, prev], next: number) => [prev, next], [0, 0]),
     switchMap(([ prev, next ]) =>
       from(linspace(prev, next, this.video.fps)).pipe(
-        zip(interval(1000 / this.video.fps), this.timeMapper)
+        zip(interval(1000 / this.video.fps), metricValue =>
+          timeMapper(metricValue, this.video)
+        )
       )
     )
   );
 
-  timeMapper = value =>
-    (this.video.length * clamp(value - this.video.offset)) / 100;
 }
