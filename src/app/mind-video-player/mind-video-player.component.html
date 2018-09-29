@@ -1,9 +1,8 @@
-<video muted
-    [currentTime]="currentTime$ | async"
-    [playbackRate]="video.playbackRate">
+<video muted [currentTime]="currentTime$ | async" [playbackRate]="video.playbackRate">
     <source [src]="video.url" [type]="video.type" />
 </video>
 <aside *ngIf="metricValue$ | async" [style.color]="video.fontColor">
     {{ metricValue$ | async }}%
     <span>{{ metricName }}</span>
 </aside>
+<footer>{{ (started$ | async) ? "stop" : "start" }}</footer>

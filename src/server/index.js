@@ -1,19 +1,31 @@
+const { createClient } = require("node-thinkgear-sockets");
+const { fromEvent } = require("rxjs/observable/fromEvent");
+const io = require("socket.io")(4501);
 
-const { createClient } = require('node-thinkgear-sockets');
-const { fromEvent } = require('rxjs/observable/fromEvent');
-const io = require('socket.io')(4501);
+const brain = createClient();
 
-const client = createClient();
+brain.connect();
 
-client.connect();
+const emit = (socket, metric) => data => {
+  console.log(metric, data);
+  socket.emit(`metric/${metric}`, data);
+};
 
-fromEvent(client, 'data')
-    .subscribe(data => sendToBrowser(data, 'eeg'));
+io.on("connection", socket => {
+  socket.on("start", () => {
+    console.log("socket start");
 
-fromEvent(client, 'blink_data')
-    .subscribe(data => sendToBrowser(data, 'blinks'));
+    const freqSubscription = fromEvent(brain, "data").subscribe(
+      emit(socket, "eeg")
+    );
+    const blinksSubscription = fromEvent(brain, "blink_data").subscribe(
+      emit(socket, "blinks")
+    );
 
-function sendToBrowser (data, metric) {
-    console.log(metric, data);
-    io.emit(`metric/${ metric }`, data);
-}
+    socket.on("stop", () => {
+      console.log("socket stop");
+      freqSubscription.unsubscribe();
+      blinksSubscription.unsubscribe();
+    });
+  });
+});
